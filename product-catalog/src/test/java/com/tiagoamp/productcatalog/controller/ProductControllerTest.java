@@ -1,7 +1,6 @@
 package com.tiagoamp.productcatalog.controller;
 
 import com.tiagoamp.productcatalog.domain.Product;
-import com.tiagoamp.productcatalog.repository.ProductRepository;
 import com.tiagoamp.productcatalog.service.ProductMapper;
 import com.tiagoamp.productcatalog.service.ProductService;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -34,31 +32,31 @@ class ProductControllerTest {
 
 
     @Test
-    void createProduct() {
+    void create() {
         var requestDTO = new ProductRequestDTO("description", "brand", BigDecimal.TEN);
         var product = mapper.toModel(requestDTO);
         product.setId(1L);
         Mockito.when(service.save(Mockito.any(Product.class))).thenReturn(product);
-        var result = controller.createProduct(requestDTO);
+        var result = controller.create(requestDTO);
         assertEquals(HttpStatus.CREATED.value(), result.getStatusCode().value());
         assertEquals(product.getId(), result.getBody().getId());
     }
 
     @Test
-    void updateProduct() {
+    void update() {
         var requestDTO = new ProductRequestDTO("description", "brand", BigDecimal.TEN);
         var product = mapper.toModel(requestDTO);
         product.setId(1L);
         Mockito.when(service.save(Mockito.any(Product.class))).thenReturn(product);
-        var result = controller.updateProduct(product.getId(), requestDTO);
+        var result = controller.update(product.getId(), requestDTO);
         assertEquals(HttpStatus.OK.value(), result.getStatusCode().value());
         assertEquals(product.getId(), result.getBody().getId());
     }
 
     @Test
-    void removeProduct() {
+    void remove() {
         long id = 1L;
-        var result = controller.removeProduct(id);
+        var result = controller.remove(id);
         assertEquals(HttpStatus.NO_CONTENT.value(), result.getStatusCode().value());
         assertNull(result.getBody());
     }

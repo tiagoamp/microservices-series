@@ -21,7 +21,7 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO requestDTO) {
+    public ResponseEntity<ProductResponseDTO> create(@RequestBody ProductRequestDTO requestDTO) {
         var product = mapper.toModel(requestDTO);
         product = service.save(product);
         var responseDTO = mapper.toResponseDTO(product);
@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequestDTO requestDTO) {
+    public ResponseEntity<ProductResponseDTO> update(@PathVariable("id") Long id, @RequestBody ProductRequestDTO requestDTO) {
         var product = mapper.toModel(requestDTO);
         product.setId(id);
         product = service.save(product);
@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity removeProduct(@PathVariable("id") Long id) {
+    public ResponseEntity remove(@PathVariable("id") Long id) {
         try{
             service.remove(id);
             return ResponseEntity.noContent().build();
