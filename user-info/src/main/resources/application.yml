@@ -1,1 +1,5 @@
-
+spring:
+  application:
+    name: User Information Microservice
+server:
+  port: 8082
