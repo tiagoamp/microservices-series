@@ -1,1 +1,3 @@
 # microservices-series
+
+WIP: creating applications to write microservices series posts.... 
