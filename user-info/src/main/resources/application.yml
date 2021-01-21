@@ -1,5 +1,15 @@
 spring:
   application:
-    name: User Information Microservice
+    name: User Information Service
+  datasource:
+    url: jdbc:h2:mem:userdb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: admin
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+
 server:
   port: 8082

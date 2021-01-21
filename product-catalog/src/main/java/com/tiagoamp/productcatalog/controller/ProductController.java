@@ -13,12 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/product")
-@RequiredArgsConstructor  @AllArgsConstructor
+@AllArgsConstructor
 public class ProductController {
 
     private ProductService service;
     private ProductMapper mapper;
-
 
     @PostMapping
     public ResponseEntity<ProductResponseDTO> create(@RequestBody ProductRequestDTO requestDTO) {
@@ -26,15 +25,6 @@ public class ProductController {
         product = service.save(product);
         var responseDTO = mapper.toResponseDTO(product);
         return ResponseEntity.created(URI.create(responseDTO.getId().toString())).body(responseDTO);
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<ProductResponseDTO> update(@PathVariable("id") Long id, @RequestBody ProductRequestDTO requestDTO) {
-        var product = mapper.toModel(requestDTO);
-        product.setId(id);
-        product = service.save(product);
-        var responseDTO = mapper.toResponseDTO(product);
-        return ResponseEntity.ok(responseDTO);
     }
 
     @DeleteMapping("{id}")

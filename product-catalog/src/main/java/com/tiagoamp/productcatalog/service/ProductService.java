@@ -2,6 +2,7 @@ package com.tiagoamp.productcatalog.service;
 
 import com.tiagoamp.productcatalog.domain.Product;
 import com.tiagoamp.productcatalog.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ProductService {
 
     private ProductRepository repository;

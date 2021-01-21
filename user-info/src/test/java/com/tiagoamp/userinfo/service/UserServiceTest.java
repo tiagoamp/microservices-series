@@ -27,18 +27,19 @@ class UserServiceTest {
     @Mock
     private UserRepository repo;
 
-    @Spy  // injects this specific instance to target class
+    @Spy
     private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @InjectMocks
     private UserService service;
 
+    private UserEntity userEntity = new UserEntity(1L, "name", "email@email.com", LocalDate.now().minusYears(30), "address");
+
 
     @DisplayName("Should create user")
     @Test
     void save() {
-        var entity = new UserEntity(1L, "name", "email@email.com", LocalDate.now().minusYears(30), "address");
-        Mockito.when(repo.save(Mockito.any(UserEntity.class))).thenReturn(entity);
+        Mockito.when(repo.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
         var result = service.save(new User());
         assertTrue(result.getId() != null);
     }
@@ -47,9 +48,8 @@ class UserServiceTest {
     @Test
     void remove() {
         try {
-            var entity = new UserEntity(1L, "name", "email@email.com", LocalDate.now().minusYears(30), "address");
-            Mockito.when(repo.findById(entity.getId())).thenReturn(Optional.of(entity));
-            service.remove(entity.getId());
+            Mockito.when(repo.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
+            service.remove(userEntity.getId());
         } catch (Exception e) {
             fail("Should not throw any exception");
         }
@@ -65,10 +65,9 @@ class UserServiceTest {
     @DisplayName("Should return user by id when it exists")
     @Test
     void find() {
-        var entity = new UserEntity(1L, "name", "email@email.com", LocalDate.now().minusYears(30), "address");
-        Mockito.when(repo.findById(entity.getId())).thenReturn(Optional.of(entity));
-        var result = service.find(entity.getId());
-        assertEquals(result.getId(), entity.getId());
+        Mockito.when(repo.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
+        var result = service.find(userEntity.getId());
+        assertEquals(result.getId(), userEntity.getId());
     }
 
     @DisplayName("Should throw exception when id does not exists")

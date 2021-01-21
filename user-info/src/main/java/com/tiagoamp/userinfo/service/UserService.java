@@ -2,19 +2,18 @@ package com.tiagoamp.userinfo.service;
 
 import com.tiagoamp.userinfo.domain.User;
 import com.tiagoamp.userinfo.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
 
     private UserRepository repository;
     private UserMapper mapper;
-
 
     public User save(User user) {
         var entity = mapper.toEntity(user);

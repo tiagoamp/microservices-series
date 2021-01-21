@@ -33,11 +33,12 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService service;
 
+    private ProductEntity productEntity = new ProductEntity(1L, "name", "Description", "Brand", BigDecimal.TEN);
+
 
     @DisplayName("Should create product")
     @Test
     void save() {
-        var productEntity = new ProductEntity(1L, "Description", "Brand", BigDecimal.TEN);
         Mockito.when(repo.save(Mockito.any(ProductEntity.class))).thenReturn(productEntity);
         var result = service.save(new Product());
         assertTrue(result.getId() != null);
@@ -47,9 +48,8 @@ class ProductServiceTest {
     @Test
     void remove() {
         try {
-            var entity = new ProductEntity(1L, "Description", "Brand", BigDecimal.TEN);
-            Mockito.when(repo.findById(entity.getId())).thenReturn(Optional.of(entity));
-            service.remove(entity.getId());
+            Mockito.when(repo.findById(productEntity.getId())).thenReturn(Optional.of(productEntity));
+            service.remove(productEntity.getId());
         } catch (Exception e) {
             fail("Should not throw any exception");
         }
@@ -65,10 +65,9 @@ class ProductServiceTest {
     @DisplayName("Should return product by id when it exists")
     @Test
     void find() {
-        var entity = new ProductEntity(1L, "Description", "Brand", BigDecimal.TEN);
-        Mockito.when(repo.findById(entity.getId())).thenReturn(Optional.of(entity));
-        var result = service.find(entity.getId());
-        assertEquals(result.getId(), entity.getId());
+        Mockito.when(repo.findById(productEntity.getId())).thenReturn(Optional.of(productEntity));
+        var result = service.find(productEntity.getId());
+        assertEquals(result.getId(), productEntity.getId());
     }
 
     @DisplayName("Should throw exception when id does not exists")
@@ -81,8 +80,8 @@ class ProductServiceTest {
     @DisplayName("Should return product list")
     @Test
     void findAll() {
-        var entitiesList = List.of(new ProductEntity(1L, "Description", "Brand", BigDecimal.TEN),
-                new ProductEntity(2L, "Description 2", "Brand 2", BigDecimal.TEN));
+        var entitiesList = List.of(new ProductEntity(1L, "name", "Description", "Brand", BigDecimal.TEN),
+                new ProductEntity(2L, "name", "Description 2", "Brand 2", BigDecimal.TEN));
         Mockito.when(repo.findAll()).thenReturn(entitiesList);
         var result = service.findAll();
         assertEquals(entitiesList.size(), result.size());

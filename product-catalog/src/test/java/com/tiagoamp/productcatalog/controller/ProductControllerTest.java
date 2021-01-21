@@ -30,12 +30,12 @@ class ProductControllerTest {
     @InjectMocks
     private ProductController controller;
 
+    private ProductRequestDTO requestDTO = new ProductRequestDTO("name", "description", "brand", BigDecimal.TEN);
+    private Product product = new Product(1L, "name", "description", "brand", BigDecimal.TEN);
+
 
     @Test
     void create() {
-        var requestDTO = new ProductRequestDTO("description", "brand", BigDecimal.TEN);
-        var product = mapper.toModel(requestDTO);
-        product.setId(1L);
         Mockito.when(service.save(Mockito.any(Product.class))).thenReturn(product);
         var result = controller.create(requestDTO);
         assertEquals(HttpStatus.CREATED.value(), result.getStatusCode().value());
@@ -43,27 +43,14 @@ class ProductControllerTest {
     }
 
     @Test
-    void update() {
-        var requestDTO = new ProductRequestDTO("description", "brand", BigDecimal.TEN);
-        var product = mapper.toModel(requestDTO);
-        product.setId(1L);
-        Mockito.when(service.save(Mockito.any(Product.class))).thenReturn(product);
-        var result = controller.update(product.getId(), requestDTO);
-        assertEquals(HttpStatus.OK.value(), result.getStatusCode().value());
-        assertEquals(product.getId(), result.getBody().getId());
-    }
-
-    @Test
     void remove() {
-        long id = 1L;
-        var result = controller.remove(id);
+        var result = controller.remove(product.getId());
         assertEquals(HttpStatus.NO_CONTENT.value(), result.getStatusCode().value());
         assertNull(result.getBody());
     }
 
     @Test
     void findById() {
-        var product = new Product(1L, "description", "brand", BigDecimal.TEN);
         Mockito.when(service.find(Mockito.anyLong())).thenReturn(product);
         var result = controller.findById(product.getId());
         assertEquals(HttpStatus.OK.value(), result.getStatusCode().value());
@@ -72,7 +59,6 @@ class ProductControllerTest {
 
     @Test
     void findAll() {
-        var product = new Product(1L, "description", "brand", BigDecimal.TEN);
         Mockito.when(service.findAll()).thenReturn(List.of(product));
         var result = controller.findAll();
         assertEquals(HttpStatus.OK.value(), result.getStatusCode().value());

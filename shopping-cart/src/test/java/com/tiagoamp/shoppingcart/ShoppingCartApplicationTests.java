@@ -1,14 +1,13 @@
-package com.tiagoamp.productcatalog;
+package com.tiagoamp.shoppingcart;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-@Disabled
 @SpringBootTest
-class ProductCatalogApplicationTests {
+class ShoppingCartApplicationTests {
 
+	@Disabled
 	@Test
 	void contextLoads() {
 	}
