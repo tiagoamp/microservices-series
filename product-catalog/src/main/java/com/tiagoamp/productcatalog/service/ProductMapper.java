@@ -5,6 +5,7 @@ import com.tiagoamp.productcatalog.controller.ProductResponseDTO;
 import com.tiagoamp.productcatalog.domain.Product;
 import com.tiagoamp.productcatalog.repository.ProductEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
