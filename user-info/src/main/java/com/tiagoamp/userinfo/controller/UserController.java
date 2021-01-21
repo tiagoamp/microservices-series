@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/user")
-@RequiredArgsConstructor  @AllArgsConstructor
+@AllArgsConstructor
 public class UserController {
 
     private UserService service;
@@ -26,15 +26,6 @@ public class UserController {
         user = service.save(user);
         var responseDTO = mapper.toResponseDTO(user);
         return ResponseEntity.created(URI.create(responseDTO.getId().toString())).body(responseDTO);
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<UserResponseDTO> update(@PathVariable("id") Long id, @RequestBody UserRequestDTO requestDTO) {
-        var user = mapper.toModel(requestDTO);
-        user.setId(id);
-        user = service.save(user);
-        var responseDTO = mapper.toResponseDTO(user);
-        return ResponseEntity.ok(responseDTO);
     }
 
     @DeleteMapping("{id}")
