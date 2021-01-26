@@ -30,6 +30,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -53,6 +57,18 @@
 			<version>${mapstruct.version}</version>
 		</dependency>
 
+		<!-- other services dependencies if necessary: product and user -->
+<!--		<dependency>-->
+<!--			<groupId>com.tiagoamp</groupId>-->
+<!--			<artifactId>product-catalog</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.tiagoamp</groupId>-->
+<!--			<artifactId>user-info</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>
@@ -69,14 +85,14 @@
 					<target>${java.version}</target>
 					<annotationProcessorPaths>
 						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${mapstruct.version}</version>
-						</path>
-						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
