@@ -1,6 +1,6 @@
 spring:
   application:
-    name: User Information Service
+    name: USER-INFORMATIVON-SERVICE
   datasource:
     url: jdbc:h2:mem:userdb
     driverClassName: org.h2.Driver

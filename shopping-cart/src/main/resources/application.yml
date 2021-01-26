@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Shopping Cart Service
+    name: SHOPPING-CART-SERVICE
 
 server:
   port: 8083
