@@ -1,12 +1,14 @@
 package com.tiagoamp.shoppingcart.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor  @AllArgsConstructor
 public class Item {
 
-    private ProductoOverview product;
+    private ProductOverview product;
     private int quantity;
 
 }

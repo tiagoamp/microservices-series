@@ -15,12 +15,15 @@ public class Cart {
     private BigDecimal totalPrice;
 
 
+    private void calculateTotalPrice() {
+        if (items == null) return;
+        totalPrice = items.stream()
+            .map(item -> item.getProduct().getPrice().multiply(new BigDecimal(item.getQuantity())))
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
     public BigDecimal getTotalPrice() {
-        if (items != null) {
-            totalPrice = items.stream()
-                .map(item -> item.getProduct().getPrice().multiply(new BigDecimal(item.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        }
+        calculateTotalPrice();
         return totalPrice;
     }
 

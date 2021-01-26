@@ -8,10 +8,17 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor  @AllArgsConstructor
-public class ProductoOverview {
+public class ProductOverview {
 
     private Long id;
     private String name;
     private BigDecimal price;
+
+
+    public BigDecimal getPrice() {
+        if (price == null)
+            price = BigDecimal.ZERO;
+        return price;
+    }
 
 }

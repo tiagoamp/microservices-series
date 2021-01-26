@@ -1,9 +1,8 @@
 package com.tiagoamp.shoppingcart.controller;
 
-import com.tiagoamp.shoppingcart.domain.Cart;
+import com.tiagoamp.shoppingcart.service.CartMapper;
 import com.tiagoamp.shoppingcart.service.ShoppingCartService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,22 +13,17 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/cart")
-@RequiredArgsConstructor  @AllArgsConstructor
+@AllArgsConstructor
 public class ShoppingCartController {
 
     private ShoppingCartService service;
+    private CartMapper mapper;
 
     @PostMapping
     public ResponseEntity<ShoppingCartResponseDTO> submit(@RequestBody ShoppingCartRequestDTO requestDTO) {
-
-        //TODO: convert request cart to model cart
-        var cart = new Cart();
-
+        var cart = mapper.toModel(requestDTO);
         cart = service.purchase(cart);
-
-        //TODO: convert model cart to response cart
-        var responseDTO = new ShoppingCartResponseDTO();
-
+        var responseDTO = mapper.toResponseDTO(cart);
         return ResponseEntity.created(URI.create(responseDTO.getId())).body(responseDTO);
     }
 
