@@ -19,8 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 public class IntegrationService {
 
-    private RestTemplate restRemplate;
-    private WebClient.Builder webClientBuilder;
+    private final RestTemplate restTemplate;
+    private final WebClient.Builder webClientBuilder;
+    private final UserFeignClient userFeignClient;
+    private final ProductFeignClient productFeignClient;
 
     private final String USER_BASE_URL = "http://localhost:8082/api/user/";
     private final String PRODUCT_BASE_URL = "http://localhost:8081/api/product/";
@@ -32,7 +34,10 @@ public class IntegrationService {
         // var user = fetchDataWithRestTemplate(USER_BASE_URL, userId, UserInfo.class);
 
         // IMPLEMENTATION 02: using WebClient
-        var user = fetchDataWithWebClient(USER_BASE_URL, userId, UserInfo.class);
+        // var user = fetchDataWithWebClient(USER_BASE_URL, userId, UserInfo.class);
+
+        // IMPLEMENTATION 03: using Feign
+        var user = userFeignClient.findById(userId);
 
         return user;
     }
@@ -44,7 +49,10 @@ public class IntegrationService {
             // var product = fetchDataWithRestTemplate(PRODUCT_BASE_URL, item.getProduct().getId(), ProductOverview.class);
 
             // IMPLEMENTATION 02: using WebClient
-            var product = fetchDataWithWebClient(PRODUCT_BASE_URL, item.getProduct().getId(), ProductOverview.class);
+            // var product = fetchDataWithWebClient(PRODUCT_BASE_URL, item.getProduct().getId(), ProductOverview.class);
+
+            // IMPLEMENTATION 03: using Feign
+            var product = productFeignClient.findById(item.getProduct().getId());
 
             item.setProduct(product);
         });
@@ -67,7 +75,7 @@ public class IntegrationService {
 
     // Generic implementation for Rest Template call
     private <T> T fetchDataWithRestTemplate(String url, Long id, Class<T> clazz) {
-        return restRemplate.getForObject(url + id, clazz);
+        return restTemplate.getForObject(url + id, clazz);
     }
 
     // Generic implementation for WebClient
@@ -80,12 +88,12 @@ public class IntegrationService {
 
     @Deprecated   // replaced by generic method
     private UserInfo fetchUserWithRestTemplate(Long userId) {
-        return restRemplate.getForObject(USER_BASE_URL + userId, UserInfo.class);
+        return restTemplate.getForObject(USER_BASE_URL + userId, UserInfo.class);
     }
 
     @Deprecated   // replaced by generic method
     private ProductOverview fetchProductWithRestTemplate(Long productId) {
-        return restRemplate.getForObject(PRODUCT_BASE_URL + productId, ProductOverview.class);
+        return restTemplate.getForObject(PRODUCT_BASE_URL + productId, ProductOverview.class);
     }
 
 }
