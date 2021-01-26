@@ -15,6 +15,11 @@ public class Cart {
     private BigDecimal totalPrice;
 
 
+    public Cart(String id, UserInfo user, List<Item> items) {
+        this(id, user, items, BigDecimal.ZERO);
+        calculateTotalPrice();
+    }
+
     private void calculateTotalPrice() {
         if (items == null) return;
         totalPrice = items.stream()
