@@ -1,15 +1,25 @@
 spring:
   application:
-    name: USER-INFORMATIVON-SERVICE
+    name: USER-INFORMATION-SERVICE
   datasource:
-    url: jdbc:h2:mem:userdb
+    url: jdbc:h2:mem:userdb;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
     username: admin
     password: admin
     database-platform: org.hibernate.dialect.H2Dialect
+    initialization-mode: always
   h2:
     console:
       enabled: true
+      settings:
+        web-allow-others: true
 
 server:
   port: 8082
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

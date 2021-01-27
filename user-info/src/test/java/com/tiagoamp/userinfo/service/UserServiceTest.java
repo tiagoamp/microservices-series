@@ -39,8 +39,9 @@ class UserServiceTest {
     @DisplayName("Should create user")
     @Test
     void save() {
+        var user = mapper.toModel(userEntity);
         Mockito.when(repo.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
-        var result = service.save(new User());
+        var result = service.save(user);
         assertTrue(result.getId() != null);
     }
 
