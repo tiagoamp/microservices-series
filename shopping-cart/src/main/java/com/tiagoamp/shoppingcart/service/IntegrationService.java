@@ -33,13 +33,13 @@ public class IntegrationService {
     public UserInfo getRemoteUserInfo(Long userId) {
 
         // IMPLEMENTATION 01: using RestTemplate
-        var user = fetchDataWithRestTemplate(USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
+        // var user = fetchDataWithRestTemplate("http://" + USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
 
         // IMPLEMENTATION 02: using WebClient
-        // var user = fetchDataWithWebClient(USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
+        // var user = fetchDataWithWebClient("http://" + USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
 
         // IMPLEMENTATION 03: using Feign
-        // var user = userFeignClient.findById(userId);
+        var user = userFeignClient.findById(userId);
 
         return user;
     }
@@ -48,10 +48,10 @@ public class IntegrationService {
         items.forEach(item -> {
 
             // IMPLEMENTATION 01: using RestTemplate
-            // var product = fetchDataWithRestTemplate(PRODUCT_SERVICE_NAME + "/api/product", item.getProduct().getId(), ProductOverview.class);
+            // var product = fetchDataWithRestTemplate("http://" + PRODUCT_SERVICE_NAME + "/api/product", item.getProduct().getId(), ProductOverview.class);
 
             // IMPLEMENTATION 02: using WebClient
-            // var product = fetchDataWithWebClient(PRODUCT_SERVICE_NAME  + "/api/product", item.getProduct().getId(), ProductOverview.class);
+            // var product = fetchDataWithWebClient("http://" + PRODUCT_SERVICE_NAME  + "/api/product", item.getProduct().getId(), ProductOverview.class);
 
             // IMPLEMENTATION 03: using Feign
             var product = productFeignClient.findById(item.getProduct().getId());
@@ -90,12 +90,12 @@ public class IntegrationService {
 
     @Deprecated   // replaced by generic method
     private UserInfo fetchUserWithRestTemplate(Long userId) {
-        return restTemplate.getForObject(USER_SERVICE_NAME + "/api/user/" + userId, UserInfo.class);
+        return restTemplate.getForObject("http://" + USER_SERVICE_NAME + "/api/user/" + userId, UserInfo.class);
     }
 
     @Deprecated   // replaced by generic method
     private ProductOverview fetchProductWithRestTemplate(Long productId) {
-        return restTemplate.getForObject(PRODUCT_SERVICE_NAME + "/api/product/" + productId, ProductOverview.class);
+        return restTemplate.getForObject("http://" + PRODUCT_SERVICE_NAME + "/api/product/" + productId, ProductOverview.class);
     }
 
 }
