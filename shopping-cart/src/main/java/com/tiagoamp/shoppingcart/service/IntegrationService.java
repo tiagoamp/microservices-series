@@ -24,20 +24,22 @@ public class IntegrationService {
     private final UserFeignClient userFeignClient;
     private final ProductFeignClient productFeignClient;
 
-    private final String USER_BASE_URL = "http://localhost:8082/api/user/";
-    private final String PRODUCT_BASE_URL = "http://localhost:8081/api/product/";
+    // private final String USER_BASE_URL = "http://localhost:8082/api/user/";
+    // private final String PRODUCT_BASE_URL = "http://localhost:8081/api/product/";
+    private final String USER_SERVICE_NAME = "USER-INFORMATION-SERVICE";
+    private final String PRODUCT_SERVICE_NAME = "PRODUCT-CATALOG-SERVICE";
 
 
     public UserInfo getRemoteUserInfo(Long userId) {
 
         // IMPLEMENTATION 01: using RestTemplate
-        // var user = fetchDataWithRestTemplate(USER_BASE_URL, userId, UserInfo.class);
+        var user = fetchDataWithRestTemplate(USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
 
         // IMPLEMENTATION 02: using WebClient
-        // var user = fetchDataWithWebClient(USER_BASE_URL, userId, UserInfo.class);
+        // var user = fetchDataWithWebClient(USER_SERVICE_NAME + "/api/user/", userId, UserInfo.class);
 
         // IMPLEMENTATION 03: using Feign
-        var user = userFeignClient.findById(userId);
+        // var user = userFeignClient.findById(userId);
 
         return user;
     }
@@ -46,10 +48,10 @@ public class IntegrationService {
         items.forEach(item -> {
 
             // IMPLEMENTATION 01: using RestTemplate
-            // var product = fetchDataWithRestTemplate(PRODUCT_BASE_URL, item.getProduct().getId(), ProductOverview.class);
+            // var product = fetchDataWithRestTemplate(PRODUCT_SERVICE_NAME + "/api/product", item.getProduct().getId(), ProductOverview.class);
 
             // IMPLEMENTATION 02: using WebClient
-            // var product = fetchDataWithWebClient(PRODUCT_BASE_URL, item.getProduct().getId(), ProductOverview.class);
+            // var product = fetchDataWithWebClient(PRODUCT_SERVICE_NAME  + "/api/product", item.getProduct().getId(), ProductOverview.class);
 
             // IMPLEMENTATION 03: using Feign
             var product = productFeignClient.findById(item.getProduct().getId());
@@ -88,12 +90,12 @@ public class IntegrationService {
 
     @Deprecated   // replaced by generic method
     private UserInfo fetchUserWithRestTemplate(Long userId) {
-        return restTemplate.getForObject(USER_BASE_URL + userId, UserInfo.class);
+        return restTemplate.getForObject(USER_SERVICE_NAME + "/api/user/" + userId, UserInfo.class);
     }
 
     @Deprecated   // replaced by generic method
     private ProductOverview fetchProductWithRestTemplate(Long productId) {
-        return restTemplate.getForObject(PRODUCT_BASE_URL + productId, ProductOverview.class);
+        return restTemplate.getForObject(PRODUCT_SERVICE_NAME + "/api/product/" + productId, ProductOverview.class);
     }
 
 }
