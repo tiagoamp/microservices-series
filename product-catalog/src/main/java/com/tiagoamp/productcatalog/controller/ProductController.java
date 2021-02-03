@@ -29,7 +29,7 @@ public class ProductController {
 
     @DeleteMapping("{id}")
     public ResponseEntity remove(@PathVariable("id") Long id) {
-        try{
+        try {
             service.remove(id);
             return ResponseEntity.noContent().build();
         } catch (NoResultException e) {
@@ -39,7 +39,7 @@ public class ProductController {
 
     @GetMapping("{id}")
     public ResponseEntity<ProductResponseDTO> findById(@PathVariable("id") Long id) {
-        try{
+        try {
             var product = service.find(id);
             return ResponseEntity.ok(mapper.toResponseDTO(product));
         } catch (NoResultException e) {
