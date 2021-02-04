@@ -30,7 +30,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public ResponseEntity remove(@PathVariable("id") Long id) {
-        try{
+        try {
             service.remove(id);
             return ResponseEntity.noContent().build();
         } catch (NoResultException e) {
@@ -40,7 +40,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<UserResponseDTO> findById(@PathVariable("id") Long id) {
-        try{
+        try {
             var user = service.find(id);
             return ResponseEntity.ok(mapper.toResponseDTO(user));
         } catch (NoResultException e) {

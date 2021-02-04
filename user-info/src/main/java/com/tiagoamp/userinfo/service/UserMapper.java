@@ -5,8 +5,6 @@ import com.tiagoamp.userinfo.controller.UserResponseDTO;
 import com.tiagoamp.userinfo.domain.User;
 import com.tiagoamp.userinfo.repository.UserEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 
