@@ -1,6 +1,10 @@
 spring:
   application:
     name: SHOPPING-CART-SERVICE
+  cloud:
+    circuitbreaker:
+      resilience4j:
+        enabled: false
 
 server:
   port: 8083
