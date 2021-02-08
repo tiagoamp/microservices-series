@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: CONFIG-SERVER-SERVICE
+#  profiles:
+#    active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: <yout_local_dir_here>
+        git:
+          uri: https://github.com/tiagoamp/microservices-series
+          search-paths: configs
+
+server:
+  port: 8084
