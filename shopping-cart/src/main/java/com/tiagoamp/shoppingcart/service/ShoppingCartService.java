@@ -2,11 +2,9 @@ package com.tiagoamp.shoppingcart.service;
 
 import com.tiagoamp.shoppingcart.domain.Cart;
 import com.tiagoamp.shoppingcart.domain.Item;
-import com.tiagoamp.shoppingcart.domain.ProductOverview;
 import com.tiagoamp.shoppingcart.domain.UserInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.UUID;
