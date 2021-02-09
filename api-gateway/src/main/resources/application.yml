@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: PRODUCT-CATALOG-SERVICE
+          uri: lb://PRODUCT-CATALOG-SERVICE
+          predicates:
+            - Path=/api/product/**
+        - id: USER-INFORMATION-SERVICE
+          uri: lb://USER-INFORMATION-SERVICE
+          predicates:
+            - Path=/api/user/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: USER-SERVICE
+#                fallbackuri: forward:/userServiceFallBack
+        - id: SHOPPING-CART-SERVICE
+          uri: lb://SHOPPING-CART-SERVICE
+          predicates:
+            - Path=/api/cart/**
+
+server:
+  port: 8085
