@@ -12,11 +12,6 @@ spring:
           uri: lb://USER-INFORMATION-SERVICE
           predicates:
             - Path=/api/user/**
-#          filters:
-#            - name: CircuitBreaker
-#              args:
-#                name: USER-SERVICE
-#                fallbackuri: forward:/userServiceFallBack
         - id: SHOPPING-CART-SERVICE
           uri: lb://SHOPPING-CART-SERVICE
           predicates:
