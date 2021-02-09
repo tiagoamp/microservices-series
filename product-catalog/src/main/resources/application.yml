@@ -1,6 +1,9 @@
 spring:
   application:
     name: PRODUCT-CATALOG-SERVICE
+  data:
+    rest:
+      base-path: api
   datasource:
     url: jdbc:h2:mem:productdb
     driverClassName: org.h2.Driver
