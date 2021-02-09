@@ -1,5 +1,6 @@
 package com.tiagoamp.shoppingcart.controller;
 
+import com.tiagoamp.shoppingcart.domain.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

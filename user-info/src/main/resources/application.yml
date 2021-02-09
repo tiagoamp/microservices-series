@@ -1,6 +1,9 @@
 spring:
   application:
     name: USER-INFORMATION-SERVICE
+  data:
+    rest:
+      base-path: api
 
 server:
   port: 8082

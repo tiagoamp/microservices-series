@@ -1,6 +1,9 @@
 spring:
   application:
     name: PRODUCT-CATALOG-SERVICE
+  data:
+    rest:
+      base-path: api
 
 server:
   port: 8081
