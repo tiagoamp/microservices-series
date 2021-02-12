@@ -22,10 +22,10 @@ public class ShoppingCartService {
         var uuid = UUID.randomUUID().toString();
         shoppingCart.setId(uuid);
 
-        UserInfo user = integrationService.getRemoteUserInfo(shoppingCart.getUser().getId());
+        var user = integrationService.getRemoteUserInfo(shoppingCart.getUser().getId());
         shoppingCart.setUser(user);
 
-        List<Item> items = integrationService.getRemoteProductItemsInfo(shoppingCart.getItems());
+        var items = integrationService.getRemoteProductItemsInfo(shoppingCart.getItems());
         shoppingCart.setItems(items);
 
         integrationService.submitToBilling(shoppingCart);
